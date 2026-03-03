@@ -265,6 +265,22 @@ windows:
     label: Include Unreliable Providers
     tooltip: "Include DTM providers that may have reliability issues or limited coverage. Use with caution."
 
+  map_generation:
+    label: Map Generation
+    tooltip: "Settings that control how the map is generated, including terrain, textures, and object placement."
+
+  map_editor:
+    label: Map Editor
+    tooltip: "Settings and options for the built-in map editor, including editing tools, grid settings, and snapping options."
+
+  settings:
+    label: Settings
+    tooltip: "Configure application settings, including language, performance options, and update preferences."
+
+  language:
+    label: Language
+    tooltip: "Select the application language. Changes will take effect after restarting the application."
+
 docker:
   label: Docker Application
   # add Docker-specific sections here

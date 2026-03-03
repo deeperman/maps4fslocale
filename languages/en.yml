@@ -101,7 +101,7 @@ generation_settings:
         tooltip: Sets all water bottoms to the same average height. Avoid on maps with large elevation differences.
 
   grle:
-    label: Farmland & Vegetation
+    label: Farmland and Vegetation
     tooltip: Control farmland generation, grass, and vegetation distribution.
     fields:
       farmland_margin:
@@ -130,7 +130,7 @@ generation_settings:
         tooltip: Fills farmlands with no detected crop type with a default ground layer.
 
   i3d:
-    label: Objects & Splines
+    label: Objects and Splines
     tooltip: Trees, forest density, road splines, and license plates.
     fields:
       add_trees:
@@ -272,6 +272,18 @@ windows:
   language:
     label: Language
     tooltip: "Select the application language. Changes will take effect after restarting the application."
+
+  use_default:
+    label: Use Default
+    tooltip: "Revert to default settings for the current section."
+
+  browse:
+    label: Browse
+    tooltip: "Open a file dialog to select a file or directory for the corresponding setting."
+
+  refresh_map_list:
+    label: Refresh Map List
+    tooltip: "Refresh the list of generated maps to include any new maps created since the application was opened."
 
 docker:
   label: Docker Application

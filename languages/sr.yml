@@ -272,6 +272,18 @@ windows:
     label: Jezik
     tooltip: "Izaberite jezik aplikacije. Promene će stupiti na snagu nakon ponovnog pokretanja aplikacije."
 
+  use_default:
+    label: Koristi podrazumevano
+    tooltip: "Vraća podrazumevana podešavanja za trenutnu sekciju."
+
+  browse:
+    label: Pregledaj
+    tooltip: "Otvara dijalog za odabir datoteke ili direktorijuma za odgovarajuće podešavanje."
+
+  refresh_map_list:
+    label: Osveži listu mapa
+    tooltip: "Osvežava listu generisanih mapa kako bi uključila nove mape kreirane od pokretanja aplikacije."
+
 docker:
   label: Docker aplikacija
   # add Docker-specific sections here

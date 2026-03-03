@@ -240,6 +240,11 @@ windows:
     label: Predložak
     tooltip: "Unapred definisani predlošci mapa sa specifičnim podešavanjima za različite vrste mapa."
 
+  schema:
+    label: Šema
+    tooltip: "Unapred definisane konfiguracije koje primenjuju specifična podešavanja za različite šeme."
+
+
   texture_schemas:
     label: Šeme tekstura
     tooltip: "Izaberite šemu tekstura za primenu specifičnih tekstura tla i materijala na mapu."
@@ -271,10 +276,6 @@ windows:
   language:
     label: Jezik
     tooltip: "Izaberite jezik aplikacije. Promene će stupiti na snagu nakon ponovnog pokretanja aplikacije."
-
-  use_default:
-    label: Koristi podrazumevano
-    tooltip: "Vraća podrazumevana podešavanja za trenutnu sekciju."
 
   browse:
     label: Pregledaj

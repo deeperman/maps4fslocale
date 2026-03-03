@@ -70,9 +70,9 @@ generation_settings:
       blur_radius:
         label: Blur Radius
         tooltip: "Smooths terrain by blurring elevation data (pixels). Avoid high values with high-quality DEM — it destroys detail."
-      minimum_height_scale:
-        label: Minimum Height Scale
-        tooltip: Minimum height scale value applied to the terrain.
+      # minimum_height_scale:
+      #   label: Minimum Height Scale
+      #   tooltip: Minimum height scale value applied to the terrain.
       add_foundations:
         label: Add Foundations
         tooltip: Flattens terrain under buildings to their average height.
@@ -241,6 +241,10 @@ windows:
     label: Template
     tooltip: "Predefined map templates with specific settings for different types of maps."
 
+  schema:
+    label: Schema
+    tooltip: "Predefined configurations that apply specific settings for different schemas."
+
   texture_schemas:
     label: Texture Schemas
     tooltip: "Choose a texture schema to apply specific ground textures and materials to the map."
@@ -272,10 +276,6 @@ windows:
   language:
     label: Language
     tooltip: "Select the application language. Changes will take effect after restarting the application."
-
-  use_default:
-    label: Use Default
-    tooltip: "Revert to default settings for the current section."
 
   browse:
     label: Browse

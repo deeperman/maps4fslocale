@@ -268,14 +268,6 @@ windows:
     label: Generisanje mape
     tooltip: "Podešavanja koja kontrolišu kako se mapa generiše, uključujući teren, teksture i postavljanje objekata."
 
-  map_editor:
-    label: Urednik mape
-    tooltip: "Podešavanja i opcije za ugrađeni urednik mape, uključujući alate za uređivanje, podešavanja mreže i opcije prianjanja."
-
-  settings:
-    label: Podešavanja
-    tooltip: "Podesite opcije aplikacije, uključujući jezik, performanse i opcije ažuriranja."
-
   language:
     label: Jezik
     tooltip: "Izaberite jezik aplikacije. Promene će stupiti na snagu nakon ponovnog pokretanja aplikacije."

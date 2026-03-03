@@ -283,4 +283,80 @@ windows:
 
 docker:
   label: Docker aplikacija
-  # add Docker-specific sections here
+
+  map_generator:
+    label: Generator mapa
+
+  my_maps:
+    label: Moje mape
+
+  presets:
+    label: Predefinisane konfiguracije
+
+  schemas_editor:
+    label: Urednik šema
+
+  settings:
+    label: Podešavanja
+
+  quick_load_presets:
+    label: Brzo učitaj konfiguracije
+
+  main_settings:
+    label: Osnovna podešavanja
+
+  generation_settings:
+    label: Podešavanja generisanja
+
+  custom_osm:
+    label: Prilagođeni OSM
+
+  custom_dem:
+    label: Prilagođeni DEM
+
+  show_only_popular:
+    label: Prikaži samo popularna
+    tooltip: "Prikazuje samo najčešće korišćena podešavanja radi jednostavnijeg interfejsa."
+
+  public_osm:
+    label: Javni OpenStreetMap
+    tooltip: "OSM podaci u realnom vremenu"
+
+  custom_osm_file:
+    label: Prilagođena OSM datoteka
+    tooltip: "Otpremite sopstvene podatke"
+
+  new_version_is_available:
+    label: Dostupna je nova verzija
+
+  upgrade:
+    label: Ažuriraj
+
+  generate_map:
+    label: Generiši mapu
+    tooltip: "Unesite ispravne koordinate, proverite podešavanja i kliknite Generiši mapu."
+
+  select_all:
+    label: Izaberi sve
+
+  deselect_all:
+    label: Poništi izbor
+
+  show_schema:
+    label: Prikaži šemu
+
+  trees:
+    label: Drveće
+
+  search_trees:
+    label: Pretraži drveće
+
+  textures:
+    label: Teksture
+
+  search_textures:
+    label: Pretraži teksture
+
+  map_preview:
+    label: Pregled mape
+    tooltip: "Unesite ispravne koordinate u levom panelu da biste videli pregled mape ovde."

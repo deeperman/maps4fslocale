@@ -283,4 +283,80 @@ windows:
 
 docker:
   label: Docker Application
-  # add Docker-specific sections here
+  
+  map_generator:
+    label: Map Generator
+  
+  my_maps:
+    label: My Maps
+
+  presets:
+    label: Presets
+
+  schemas_editor:
+    label: Schemas Editor
+
+  settings:
+    label: Settings
+
+  quick_load_presets:
+    label: Quick Load Presets
+  
+  main_settings:
+    label: Main Settings
+  
+  generation_settings:
+    label: Generation Settings
+
+  custom_osm:
+    label: Custom OSM
+  
+  custom_dem:
+    label: Custom DEM
+
+  show_only_popular:
+    label: Show Only Popular
+    tooltip: "Show only the most commonly used settings to simplify the interface."
+
+  public_osm:
+    label: Public OpenStreetMap
+    tooltip: "Real-time OSM data"
+
+  custom_osm_file:
+    label: Custom OSM File
+    tooltip: "Upload your own data"
+
+  new_version_is_available:
+    label: New version is available
+  
+  upgrade:
+    label: Upgrade
+
+  generate_map:
+    label: Generate Map
+    tooltip: "Enter valid coordinates, check the settings and click Generate map."
+
+  select_all:
+    label: Select All
+
+  deselect_all:
+    label: Deselect All
+
+  show_schema:
+    label: Show Schema
+  
+  trees:
+    label: Trees
+
+  search_trees:
+    label: Search trees
+
+  textures:
+    label: Textures
+
+  search_textures:
+    label: Search textures
+
+  map_preview:
+    label: Map Preview
+    tooltip: "Enter valid coordinates in the left panel to see your map preview here."

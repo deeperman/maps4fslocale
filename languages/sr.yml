@@ -1,0 +1,269 @@
+# languages/sr.yml
+
+meta:
+  code: sr
+  full: Serbian
+  localized: Srpski
+
+main_settings:
+  label: Osnovna podešavanja
+  tooltip: Osnovni parametri za generisanje mape
+  fields:
+    game:
+      label: Igra
+      tooltip: "Ciljna verzija FS-a. Napomena: podrška za FS22 je ukinuta — koristite FS25 za najbolje rezultate."
+    coordinates:
+      label: Koordinate
+      tooltip: Geografska širina i dužina centra mape, razdvojene zarezom ili razmakom (npr. 45.28, 20.23). Samo decimalni format.
+    size:
+      label: Veličina mape
+      tooltip: "Veličina mape u metrima. Upozorenje: mape od 16km mogu da prekoračе ograničenja FS25 motora i sruše Giants Editor."
+    output_size:
+      label: Veličina izlaza
+      tooltip: Smesti veće područje stvarnog sveta u manji kompatibilan format (npr. područje od 3000m → izlaz od 2048m).
+    rotation:
+      label: Rotacija
+      tooltip: "Rotira mapu od -90° do 90°. Utiče na teren i sve geografske elemente ravnomerno."
+    dtm_provider:
+      label: DTM provajder
+      tooltip: Izvor podataka o visini terena. Regionalni provajderi nude veću rezoluciju od globalnih — izaberite najboljeg dostupnog za vaše područje.
+    main_settings_preset:
+      label: Predefinisana osnovna podešavanja
+      tooltip: "Unapred sačuvane konfiguracije sa vašim podešavanjima. Uštedite vreme ponovnim korišćenjem omiljenih konfiguracija za različite mape."
+    custom_osm:
+      label: Prilagođena OSM datoteka
+      tooltip: "Koristite sopstvenu .osm datoteku umesto preuzimanja sa OSM API-ja."
+    custom_dem:
+      label: Prilagođena DEM datoteka
+      tooltip: "Koristite sopstvenu .png DEM datoteku umesto preuzimanja od DTM provajdera. Mora biti jednokanalni sivi 16-bitni PNG gde vrednosti piksela predstavljaju nadmorsku visinu."
+    output_directory:
+      label: Izlazni direktorijum
+      tooltip: "Fascikla u kojoj će biti sačuvane generisane datoteke mape. Mora biti prazna kako bi se izbegla sukobi."
+
+generation_settings:
+  label: Podešavanja generisanja
+  tooltip: Podešavanja koja kontrolišu kako se mapa generiše
+
+  generation_preset:
+    label: Predefinisana podešavanja generisanja
+    tooltip: "Unapred sačuvane konfiguracije generisanja. Uštedite vreme ponovnim korišćenjem omiljenih podešavanja za različite mape."
+
+  dem:
+    label: DEM
+    tooltip: Kontrolišite visinu terena, zaglađivanje i podešavanja visine.
+    fields:
+      adjust_terrain_to_ground_level:
+        label: Poravnaj teren sa nivoom tla
+        tooltip: Pomera ceo teren tako da najniža tačka odgovara nivou tla.
+      multiplier:
+        label: Množilac visine
+        tooltip: Skalira vrednosti visine. Veće vrednosti daju dramatičniji teren.
+      plateau:
+        label: Plato
+        tooltip: "Dodaje osnovnu visinu (u metrima) celoj mapi. Korisno za ravničarska područja gde je potreban prostor za negativnu visinu (npr. reke)."
+      ceiling:
+        label: Gornja granica
+        tooltip: Slobodan prostor iznad najviše tačke terena. Korisno ako planirate ručno oblikovanje terena u Giants Editoru.
+      water_depth:
+        label: Dubina vode
+        tooltip: "Oduzima ovu dubinu od vodenih površina. Nemojte koristiti sa visokokvalitetnim DEM podacima — može da pokvari postojeće podatke o dubini."
+      blur_radius:
+        label: Poluprecnik zamućenja
+        tooltip: "Zaglađuje teren zamućivanjem visinske mape (pikseli). Izbegavajte visoke vrednosti sa visokokvalitetnim DEM podacima — uništava detalje."
+      minimum_height_scale:
+        label: Minimalna skala visine
+        tooltip: Minimalna vrednost skale visine primenjena na teren.
+      add_foundations:
+        label: Dodaj temelje
+        tooltip: Poravnava teren ispod zgrada na njihovu prosečnu visinu.
+
+  background:
+    label: Pozadina
+    tooltip: Teren, voda i 3D elementi koji okružuju područje mape za igru.
+    fields:
+      generate_background:
+        label: Generiši pozadinu
+        tooltip: "Generiše pozadinski teren van oblasti za igru. FS25: takođe kreira i3d datoteku spremnu za uvoz kada su satelitske slike omogućene."
+      generate_water:
+        label: Generiši vodu
+        tooltip: "Generiše datoteke vodenih ravni. FS25: kreira i3d datoteku za direktan uvoz u Giants Editor."
+      water_blurriness:
+        label: Zamućenost vode
+        tooltip: Zaglađuje površinu vodenih ravni. Previše visoka vrednost može da uzrokuje nepodudaranje vodene mreže sa terenom.
+      remove_center:
+        label: Ukloni centar
+        tooltip: Uklanja oblast mape za igru iz pozadinske mreže kako se ne bi preklapale.
+      flatten_roads:
+        label: Poravnaj puteve
+        tooltip: "Poravnava teren ispod puteva. Nemojte koristiti sa visokokvalitetnim DTM provajderima — može da pogorša rezultate."
+      flatten_water:
+        label: Poravnaj vodu
+        tooltip: Postavlja dno svih vodenih površina na istu prosečnu visinu. Izbegavajte na mapama sa velikim razlikama u visini.
+
+  grle:
+    label: Oranice i vegetacija
+    tooltip: Kontrolišite generisanje oranica, trave i raspored vegetacije.
+    fields:
+      farmland_margin:
+        label: Margina oranice
+        tooltip: Proširuje svaki poligon oranice za zadati broj metara. Sprečava rezanje ivica i probleme u igri.
+      add_farmyards:
+        label: Dodaj farme
+        tooltip: Kreira oranice iz OSM oblasti farmi. Za njih se ne crtaju polja ni teksture.
+      base_price:
+        label: Osnovna cena polja
+        tooltip: Osnovna cena oranice u valuti igre. Podrazumevane mape u igri koriste 60000.
+      price_scale:
+        label: Skala cene
+        tooltip: Procentualni množilac primenjen na osnovnu cenu oranice.
+      add_grass:
+        label: Dodaj travu
+        tooltip: Popunjava sve prazne oblasti (bez puteva, polja ili zgrada) travom.
+      base_grass:
+        label: Osnovna trava
+        tooltip: "Vrsta biljke koja se koristi kao osnovni sloj trave. Napomena: smallDenseMix se ne može kositi — izaberite livadski tip ako želite travu koja se može kositi."
+      random_plants:
+        label: Nasumično bilje
+        tooltip: Dodaje razne vrste biljaka na prazne oblasti. Onemogućite da koristite samo osnovnu travu.
+      fill_empty_farmlands:
+        label: Popuni prazne oranice
+        tooltip: Popunjava oranice bez detektovane vrste useva podrazumevanim slojem tla.
+
+  i3d:
+    label: Objekti i splajnovi
+    tooltip: Drveće, gustina šume, putni splajnovi i registarske tablice.
+    fields:
+      add_trees:
+        label: Dodaj drveće
+        tooltip: Postavlja drveće u šumskim oblastima definisanim u OSM podacima.
+      forest_density:
+        label: Gustina šume
+        tooltip: "Razmak između stabala u metrima. Manje = gušća šuma. Previše niske vrednosti mogu da sruše Giants Editor."
+      tree_limit:
+        label: Ograničenje drveća
+        tooltip: "Ograničava ukupan broj stabala automatskim podešavanjem gustine. Postavite na 0 za bez ograničenja. Koristite da sprečite rušenje Giants Editora na velikim mapama."
+      trees_relative_shift:
+        label: Nasumičnost pozicije drveća
+        tooltip: Nasumični pomak pozicije svakog stabla kako bi se izbegao uniformni šablonski raspored.
+      spline_density:
+        label: Gustina splajnova
+        tooltip: Broj tačaka koje definišu putne splajnove. Niže vrednosti daju glađe i jednostavnije splajnove.
+      add_reversed_splines:
+        label: Dodaj obrnute splajnove
+        tooltip: Duplira svaki splajn u obrnutom smeru za podršku dvosmерnog saobraćaja.
+      field_splines:
+        label: Splajnovi polja
+        tooltip: Generiše splajnove duž granica polja.
+      license_plate_prefix:
+        label: Prefiks registarskih tablica
+        tooltip: "Samo FS25: regionalni prefiks na tablicama pored automatski detektovanog koda države (npr. 'NS' → 'SRB NS'). Maks. 3 karaktera."
+
+  texture:
+    label: Teksture
+    tooltip: Bojenje terena teksturama, detekcija polja i obrada OSM podataka.
+    fields:
+      dissolve:
+        label: Rastopi ivice
+        tooltip: "Meša ivice slojeva tekstura za prirodniji izgled. Sporo — omogućite samo za finalnu generaciju, ne za testove."
+      fields_padding:
+        label: Punjenje polja
+        tooltip: Smanjuje poligone polja za zadati broj metara. Korisno kada su polja previše blizu ili se preklapaju.
+      skip_drains:
+        label: Preskoči kanale
+        tooltip: Preskače generisanje kanala i jarkova iz OSM podataka.
+      use_cache:
+        label: Koristi keš
+        tooltip: Ponovo koristi prethodno preuzete OSM podatke. Onemogućite ako su se OSM podaci promenili od poslednje generacije.
+      use_precise_tags:
+        label: Koristi precizne oznake
+        tooltip: "Koristi specifične OSM oznake (npr. leaf_type) umesto opštih. Objekti bez precizne oznake neće biti nacrtani — koristite samo ako vaše područje ima potpune OSM podatke."
+
+  satellite:
+    label: Satelitske slike
+    tooltip: Preuzimanje i konfiguracija satelitskih slika za teksture i pozadinu.
+    fields:
+      download_images:
+        label: Preuzmi satelitske slike
+        tooltip: "Preuzima satelitske slike. FS25: automatski generiše background_terrain.i3d i overview.dds za direktan uvoz u Giants Editor."
+      zoom_level:
+        label: Nivo zuma
+        tooltip: "Nivo detalja satelitskih slika (preporučeni maks: 18). Visoke vrednosti stvaraju mnogo veće datoteke i značajno duže vreme preuzimanja."
+
+  building:
+    label: Zgrade
+    tooltip: Automatsko postavljanje zgrada iz OSM podataka o gabaritu.
+    fields:
+      generate_buildings:
+        label: Generiši zgrade
+        tooltip: Postavlja zgrade na osnovu OSM podataka o gabaritu zgrada.
+      region:
+        label: Stil regiona
+        tooltip: Region arhitektonskog stila koji se koristi pri odabiru sredstava zgrada.
+      tolerance_factor:
+        label: Faktor tolerancije
+        tooltip: Koliko strogo gabariti zgrada moraju da odgovaraju dostupnim sredstvima. Više = više zgrada, ali manje precizni oblici.
+
+# Platform-specific sections come after shared settings
+
+windows:
+  label: Windows aplikacija
+
+  generate_map:
+    label: Generiši mapu
+    tooltip: "Pokreće proces generisanja mape sa trenutnim podešavanjima."
+
+  ready_to_generate:
+    label: Spreman za generisanje
+    tooltip: "Sva obavezna podešavanja su konfigurisana. Kliknite Generiši mapu da pokrenete proces."
+
+  map_editor:
+    label: Urednik mape
+    tooltip: "Omogućava uređivanje generisane mape u ugrađenom uredniku. Napomena: ovo je osnovni urednik za brze izmene — za napredne izmene koristite Giants Editor."
+
+  select_map:
+    label: Izaberi mapu
+    tooltip: "Izaberite prethodno generisanu mapu za uređivanje ili pregled u Uredniku mape."
+
+  edit_weather:
+    label: Uredi vreme
+    tooltip: "Podesite vremenске prilike za mapu, uključujući doba dana, godišnje doba i dinamičke vremenske obrasce."
+
+  settings:
+    label: Podešavanja
+    tooltip: "Podesite opcije aplikacije, uključujući jezik, performanse i opcije ažuriranja."
+
+  map_template:
+    label: Predložak mape
+    tooltip: "Izaberite predložak mape koji će se koristiti kao osnova za generisanje."
+
+  template:
+    label: Predložak
+    tooltip: "Unapred definisani predlošci mapa sa specifičnim podešavanjima za različite vrste mapa."
+
+  texture_schemas:
+    label: Šeme tekstura
+    tooltip: "Izaberite šemu tekstura za primenu specifičnih tekstura tla i materijala na mapu."
+
+  tree_schemas:
+    label: Šeme drveća
+    tooltip: "Izaberite šemu drveća za primenu specifičnih vrsta i rasporeda drveća na mapu."
+
+  building_schemas:
+    label: Šeme zgrada
+    tooltip: "Izaberite šemu zgrada za primenu specifičnih vrsta i rasporeda zgrada na mapu."
+
+  general:
+    label: Opšte
+    tooltip: "Opšta podešavanja i opcije za generisanje mape i ponašanje aplikacije."
+
+  dtm_provider_settings:
+    label: Podešavanja DTM provajdera
+    tooltip: "Podesite opcije specifične za izabrani DTM provajder, kao što su API ključevi, podešavanja rezolucije i keširanje podataka."
+
+  include_unreliable_providers:
+    label: Uključi nepouzdane provajdere
+    tooltip: "Uključuje DTM provajdere koji mogu imati probleme sa pouzdanošću ili ograničenim pokrićem. Koristite sa oprezom."
+
+docker:
+  label: Docker aplikacija
+  # add Docker-specific sections here

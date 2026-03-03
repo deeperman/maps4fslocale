@@ -1,0 +1,361 @@
+# languages/it.yml
+
+meta:
+  code: it
+  full: Italian
+  localized: Italiano
+
+main_settings:
+  label: Impostazioni principali
+  tooltip: Parametri principali per la generazione della mappa
+  fields:
+    game:
+      label: Gioco
+      tooltip: "Versione FS di destinazione. Nota: il supporto a FS22 è stato interrotto — usa FS25 per risultati ottimali."
+    coordinates:
+      label: Coordinate
+      tooltip: Latitudine e longitudine del centro della mappa, separate da virgola o spazio (es. 45.28, 20.23). Solo formato decimale.
+    size:
+      label: Dimensione mappa
+      tooltip: "Dimensione della mappa in metri. Attenzione: le mappe da 16 km possono superare i limiti del motore FS25 e causare crash di Giants Editor."
+    output_size:
+      label: Dimensione output
+      tooltip: Ridimensiona un'area reale più grande in una dimensione di mappa compatibile (es. area da 3000 m → output da 2048 m).
+    rotation:
+      label: Rotazione
+      tooltip: "Ruota la mappa da -90° a 90°. Influisce uniformemente sul terreno e su tutti gli elementi geografici."
+    dtm_provider:
+      label: Provider DTM
+      tooltip: Fonte dei dati di elevazione. I provider regionali offrono maggiore risoluzione rispetto a quelli globali — scegli il migliore disponibile per la tua area.
+    main_settings_preset:
+      label: Preset impostazioni principali
+      tooltip: "Configurazioni predefinite con le tue impostazioni. Risparmia tempo riutilizzando le configurazioni preferite per mappe diverse."
+    custom_osm:
+      label: File OSM personalizzato
+      tooltip: "Usa il tuo file .osm personalizzato invece di scaricare dall'API OSM."
+    custom_dem:
+      label: File DEM personalizzato
+      tooltip: "Usa il tuo file .png DEM personalizzato. Deve essere un PNG a 16 bit in scala di grigi a singola banda dove i valori dei pixel rappresentano l'elevazione."
+    output_directory:
+      label: Directory di output
+      tooltip: "Cartella in cui verranno salvati i file della mappa generata. Deve essere vuota per evitare conflitti."
+
+generation_settings:
+  label: Impostazioni di generazione
+  tooltip: Impostazioni che controllano come viene generata la mappa
+
+  generation_preset:
+    label: Preset di generazione
+    tooltip: "Configurazioni di generazione predefinite. Risparmia tempo riutilizzando le impostazioni preferite."
+
+  dem:
+    label: DEM
+    tooltip: Controlla l'elevazione, la levigatura e le regolazioni dell'altezza del terreno.
+    fields:
+      adjust_terrain_to_ground_level:
+        label: Allinea il terreno al livello del suolo
+        tooltip: Sposta tutto il terreno in modo che il punto più basso coincida con il livello del suolo.
+      multiplier:
+        label: Moltiplicatore altezza
+        tooltip: Scala i valori di elevazione. Valori più alti producono un terreno più drammatico.
+      plateau:
+        label: Altopiano
+        tooltip: "Aggiunge un'altezza base (metri) a tutta la mappa. Utile per aree pianeggianti che necessitano di spazio per elevazione negativa (es. fiumi)."
+      ceiling:
+        label: Soffitto
+        tooltip: Margine sopra il punto più elevato. Utile se prevedi di scolpire manualmente il terreno in Giants Editor.
+      water_depth:
+        label: Profondità acqua
+        tooltip: "Sottrae questa profondità dalle aree d'acqua. Non utilizzare con dati DEM di alta qualità — corromperà i dati di profondità esistenti."
+      blur_radius:
+        label: Raggio sfocatura
+        tooltip: "Leviga il terreno sfocando i dati di elevazione (pixel). Evita valori elevati con DEM di alta qualità — distrugge i dettagli."
+      minimum_height_scale:
+        label: Scala altezza minima
+        tooltip: Valore minimo della scala di altezza applicato al terreno.
+      add_foundations:
+        label: Aggiungi fondamenta
+        tooltip: Livella il terreno sotto gli edifici alla loro altezza media.
+
+  background:
+    label: Sfondo
+    tooltip: Terreno, acqua ed elementi 3D che circondano l'area di gioco della mappa.
+    fields:
+      generate_background:
+        label: Genera sfondo
+        tooltip: "Genera il terreno di sfondo fuori dall'area giocabile. FS25: genera anche un file i3d pronto all'uso quando le immagini satellitari sono abilitate."
+      generate_water:
+        label: Genera acqua
+        tooltip: "Genera i file dei piani d'acqua. FS25: genera un file i3d per l'importazione diretta in Giants Editor."
+      water_blurriness:
+        label: Sfocatura acqua
+        tooltip: Leviga la superficie dei piani d'acqua. Valori troppo alti possono causare una mancata corrispondenza tra la mesh dell'acqua e il terreno.
+      remove_center:
+        label: Rimuovi centro
+        tooltip: Rimuove l'area di mappa giocabile dalla mesh di sfondo per evitare sovrapposizioni.
+      flatten_roads:
+        label: Livella strade
+        tooltip: "Livella il terreno sotto le strade. Non utilizzare con provider DTM di alta qualità — può peggiorare i risultati."
+      flatten_water:
+        label: Livella acqua
+        tooltip: Imposta il fondo di tutte le superfici d'acqua alla stessa altezza media. Da evitare su mappe con grandi differenze di quota.
+
+  grle:
+    label: Terreni agricoli e vegetazione
+    tooltip: Controlla la generazione di terreni agricoli, erba e distribuzione della vegetazione.
+    fields:
+      farmland_margin:
+        label: Margine terreno agricolo
+        tooltip: Espande ogni poligono di terreno agricolo di questi metri. Previene il taglio dei bordi e i problemi di gameplay.
+      add_farmyards:
+        label: Aggiungi cortili agricoli
+        tooltip: Crea terreni agricoli dalle aree cortile OSM. Nessun campo o texture viene disegnato per questi.
+      base_price:
+        label: Prezzo base del campo
+        tooltip: Prezzo base dei terreni agricoli nella valuta del gioco. Le mappe predefinite usano 60000.
+      price_scale:
+        label: Scala prezzo
+        tooltip: Moltiplicatore percentuale applicato al prezzo base del terreno agricolo.
+      add_grass:
+        label: Aggiungi erba
+        tooltip: Riempie tutte le aree vuote (senza strade, campi o edifici) con erba.
+      base_grass:
+        label: Erba base
+        tooltip: "Tipo di pianta usato come strato di erba base. Nota: smallDenseMix non può essere falciato — scegli un tipo prato per erba falciabile."
+      random_plants:
+        label: Piante casuali
+        tooltip: Aggiunge specie vegetali varie nelle aree vuote. Disabilita per usare solo l'erba base.
+      fill_empty_farmlands:
+        label: Riempi terreni vuoti
+        tooltip: Riempie i terreni agricoli senza tipo di coltura rilevato con uno strato di suolo predefinito.
+
+  i3d:
+    label: Oggetti e spline
+    tooltip: Alberi, densità della foresta, spline stradali e targhe.
+    fields:
+      add_trees:
+        label: Aggiungi alberi
+        tooltip: Posiziona alberi nelle aree boschive definite da OSM.
+      forest_density:
+        label: Densità foresta
+        tooltip: "Distanza in metri tra gli alberi. Minore = foresta più densa. Valori molto bassi possono causare crash di Giants Editor."
+      tree_limit:
+        label: Limite alberi
+        tooltip: "Limita il numero totale di alberi regolando automaticamente la densità. Imposta 0 per nessun limite. Previene crash di Giants Editor su mappe grandi."
+      trees_relative_shift:
+        label: Casualità posizione alberi
+        tooltip: Spostamento casuale della posizione per ogni albero per evitare un pattern a griglia uniforme.
+      spline_density:
+        label: Densità spline
+        tooltip: Numero di punti che definiscono le spline stradali. Valori inferiori producono spline più lisce.
+      add_reversed_splines:
+        label: Aggiungi spline invertite
+        tooltip: Duplica ogni spline in direzione inversa per il supporto stradale bidirezionale.
+      field_splines:
+        label: Spline dei campi
+        tooltip: Genera spline lungo i confini dei campi.
+      license_plate_prefix:
+        label: Prefisso targa
+        tooltip: "Solo FS25: prefisso regionale sulle targhe accanto al codice paese rilevato automaticamente (es. 'NS' → 'SRB NS'). Max 3 caratteri."
+
+  texture:
+    label: Texture
+    tooltip: Pittura texture del suolo, rilevamento campi e gestione dati OSM.
+    fields:
+      dissolve:
+        label: Dissolvi bordi
+        tooltip: "Mescola i bordi degli strati di texture per un aspetto più naturale. Lento — abilitare solo per la generazione finale."
+      fields_padding:
+        label: Padding campi
+        tooltip: Riduce i poligoni dei campi di questi metri. Utile quando i campi sono troppo vicini o si sovrappongono.
+      skip_drains:
+        label: Salta drenaggi
+        tooltip: Salta la generazione di drenaggi e fossi dai dati OSM.
+      use_cache:
+        label: Usa cache
+        tooltip: Riutilizza i dati OSM scaricati in precedenza. Disabilita se i dati OSM sono cambiati dall'ultima generazione.
+      use_precise_tags:
+        label: Usa tag precisi
+        tooltip: "Usa tag OSM specifici (es. leaf_type) invece di quelli generici. Gli oggetti senza tag preciso non verranno disegnati — usa solo se la tua area ha tag OSM completi."
+
+  satellite:
+    label: Immagini satellitari
+    tooltip: Scaricare e configurare immagini satellitari per texture e sfondo.
+    fields:
+      download_images:
+        label: Scarica immagini satellitari
+        tooltip: "Scarica immagini satellitari. FS25: genera automaticamente anche background_terrain.i3d e overview.dds per l'importazione diretta in Giants Editor."
+      zoom_level:
+        label: Livello zoom
+        tooltip: "Livello di dettaglio delle immagini satellitari (massimo consigliato: 18). Valori elevati producono file molto più grandi e tempi di download notevolmente più lunghi."
+
+  building:
+    label: Edifici
+    tooltip: Posizionamento automatico degli edifici dai dati di impronta OSM.
+    fields:
+      generate_buildings:
+        label: Genera edifici
+        tooltip: Posiziona edifici basati sull'impronta degli edifici OSM.
+      region:
+        label: Stile regionale
+        tooltip: Regione di stile architettonico utilizzata per la selezione degli asset degli edifici.
+      tolerance_factor:
+        label: Fattore di tolleranza
+        tooltip: Con quanta precisione le impronte degli edifici devono corrispondere agli asset disponibili. Maggiore = più edifici, forme meno accurate.
+
+# Platform-specific sections come after shared settings
+
+windows:
+  label: Applicazione Windows
+
+  generate_map:
+    label: Genera mappa
+    tooltip: "Avvia il processo di generazione della mappa con le impostazioni correnti."
+
+  ready_to_generate:
+    label: Pronto per generare
+    tooltip: "Tutte le impostazioni richieste sono configurate. Clicca su Genera mappa per avviare il processo."
+
+  map_editor:
+    label: Editor mappa
+    tooltip: "Permette di modificare la mappa generata nell'editor integrato. Nota: per modifiche avanzate usa Giants Editor."
+
+  select_map:
+    label: Seleziona mappa
+    tooltip: "Scegli una mappa precedentemente generata da modificare o visualizzare nell'editor mappa."
+
+  edit_weather:
+    label: Modifica meteo
+    tooltip: "Configura le impostazioni meteo della mappa, inclusi ora del giorno, stagione e modelli meteorologici dinamici."
+
+  settings:
+    label: Impostazioni
+    tooltip: "Configura le impostazioni dell'applicazione, inclusi lingua, prestazioni e preferenze di aggiornamento."
+
+  map_template:
+    label: Modello mappa
+    tooltip: "Seleziona un modello di mappa da usare come base per la generazione."
+
+  template:
+    label: Modello
+    tooltip: "Modelli di mappa predefiniti con impostazioni specifiche per diversi tipi di mappa."
+
+  schema:
+    label: Schema
+    tooltip: "Configurazioni predefinite con impostazioni specifiche per diversi schemi."
+
+  texture_schemas:
+    label: Schemi texture
+    tooltip: "Scegli uno schema texture per applicare texture del suolo e materiali specifici."
+
+  tree_schemas:
+    label: Schemi alberi
+    tooltip: "Scegli uno schema alberi per applicare tipi e distribuzioni di alberi specifici."
+
+  building_schemas:
+    label: Schemi edifici
+    tooltip: "Scegli uno schema edifici per applicare tipi e distribuzioni di edifici specifici."
+
+  general:
+    label: Generale
+    tooltip: "Impostazioni generali e opzioni per la generazione della mappa e il comportamento dell'applicazione."
+
+  dtm_provider_settings:
+    label: Impostazioni provider DTM
+    tooltip: "Configura le impostazioni specifiche del provider DTM selezionato, come chiavi API e caching dei dati."
+
+  include_unreliable_providers:
+    label: Includi provider non affidabili
+    tooltip: "Include provider DTM che potrebbero avere problemi di affidabilità o copertura limitata. Usare con cautela."
+
+  map_generation:
+    label: Generazione mappa
+    tooltip: "Impostazioni che controllano come viene generata la mappa, inclusi terreno, texture e posizionamento oggetti."
+
+  browse:
+    label: Sfoglia
+    tooltip: "Apre una finestra di dialogo per selezionare un file o una directory."
+
+  refresh_map_list:
+    label: Aggiorna lista mappe
+    tooltip: "Aggiorna la lista delle mappe generate per includere le nuove mappe create dall'avvio dell'applicazione."
+
+docker:
+  label: Applicazione Docker
+
+  map_generator:
+    label: Generatore mappe
+
+  my_maps:
+    label: Le mie mappe
+
+  presets:
+    label: Preset
+
+  schemas_editor:
+    label: Editor schemi
+
+  settings:
+    label: Impostazioni
+
+  quick_load_presets:
+    label: Caricamento rapido preset
+
+  main_settings:
+    label: Impostazioni principali
+
+  generation_settings:
+    label: Impostazioni di generazione
+
+  custom_osm:
+    label: OSM personalizzato
+
+  custom_dem:
+    label: DEM personalizzato
+
+  show_only_popular:
+    label: Mostra solo i popolari
+    tooltip: "Mostra solo le impostazioni più comunemente usate per semplificare l'interfaccia."
+
+  public_osm:
+    label: OpenStreetMap pubblico
+    tooltip: "Dati OSM in tempo reale"
+
+  custom_osm_file:
+    label: File OSM personalizzato
+    tooltip: "Carica i tuoi dati"
+
+  new_version_is_available:
+    label: È disponibile una nuova versione
+
+  upgrade:
+    label: Aggiorna
+
+  generate_map:
+    label: Genera mappa
+    tooltip: "Inserisci coordinate valide, controlla le impostazioni e clicca su Genera mappa."
+
+  select_all:
+    label: Seleziona tutto
+
+  deselect_all:
+    label: Deseleziona tutto
+
+  show_schema:
+    label: Mostra schema
+
+  trees:
+    label: Alberi
+
+  search_trees:
+    label: Cerca alberi
+
+  textures:
+    label: Texture
+
+  search_textures:
+    label: Cerca texture
+
+  map_preview:
+    label: Anteprima mappa
+    tooltip: "Inserisci coordinate valide nel pannello sinistro per vedere l'anteprima della mappa qui."

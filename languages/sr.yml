@@ -52,9 +52,9 @@ generation_settings:
     label: DEM
     tooltip: Kontrolišite visinu terena, zaglađivanje i podešavanja visine.
     fields:
-      adjust_terrain_to_ground_level:
-        label: Poravnaj teren sa nivoom tla
-        tooltip: Pomera ceo teren tako da najniža tačka odgovara nivou tla.
+      # adjust_terrain_to_ground_level:
+      #   label: Poravnaj teren sa nivoom tla
+      #   tooltip: Pomera ceo teren tako da najniža tačka odgovara nivou tla.
       multiplier:
         label: Množilac visine
         tooltip: Skalira vrednosti visine. Veće vrednosti daju dramatičniji teren.
@@ -272,10 +272,6 @@ windows:
   map_generation:
     label: Generisanje mape
     tooltip: "Podešavanja koja kontrolišu kako se mapa generiše, uključujući teren, teksture i postavljanje objekata."
-
-  language:
-    label: Jezik
-    tooltip: "Izaberite jezik aplikacije. Promene će stupiti na snagu nakon ponovnog pokretanja aplikacije."
 
   browse:
     label: Pregledaj

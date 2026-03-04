@@ -30,6 +30,7 @@
 [![Join Discord](https://img.shields.io/badge/join-discord-blue)](https://discord.gg/wemVfUUFRA)
 [![GitHub issues](https://img.shields.io/github/issues/iwatkot/maps4fslocale)](https://github.com/iwatkot/maps4fslocale/issues)
 [![GitHub Repo stars](https://img.shields.io/github/stars/iwatkot/maps4fslocale)](https://github.com/iwatkot/maps4fslocale/stargazers)
+[![Check Status](https://github.com/iwatkot/maps4fslocale/actions/workflows/validate-locales-push.yml/badge.svg)](https://github.com/iwatkot/maps4fslocale/actions)
 
 </div>
 

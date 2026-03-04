@@ -1,0 +1,416 @@
+# languages/ru.yml
+
+meta:
+  code: ru
+  full: Russian
+  localized: Русский
+
+main_settings:
+  label: Main Settings
+  tooltip: Core parameters for map generation
+  fields:
+    game:
+      label: Game
+      tooltip: "Target FS version. Note: FS22 support is discontinued — use FS25 for best results."
+    coordinates:
+      label: Coordinates
+      tooltip: Latitude and longitude of the map center, comma or space separated (e.g. 45.28, 20.23). Decimal format only.
+    size:
+      label: Map Size
+      tooltip: "Map size in meters. Warning: 16km maps may exceed FS25 engine limits and crash Giants Editor."
+    output_size:
+      label: Output Size
+      tooltip: Scale a larger real-world area into a smaller compatible map size (e.g. 3000m region → 2048m output).
+    rotation:
+      label: Rotation
+      tooltip: "Rotates the map -90-90°. Affects terrain and all geographic features uniformly."
+    dtm_provider:
+      label: DTM Provider
+      tooltip: Elevation data source. Regional providers offer higher resolution than global ones — pick the best available for your area.
+    main_settings_preset:
+      label: Main Settings Preset
+      tooltip: "Predefined configurations with your customized settings. Save time by reusing your preferred setups for different maps or testing scenarios."
+    custom_osm:
+      label: Custom OSM File
+      tooltip: "Use your custom .osm file instead of downloading from the OSM API."
+    custom_dem:
+      label: Custom DEM File
+      tooltip: "Use your custom .png DEM file instead of downloading from a DTM provider. Must be a single-band grayscale 16-bit PNG where pixel values represent elevation."
+    output_directory:
+      label: Output Directory
+      tooltip: "Folder where generated map files will be saved. Must be empty to avoid conflicts."
+
+generation_settings:
+  label: Generation Settings
+  tooltip: Settings that control how the map is generated
+
+  generation_preset:
+    label: Generation Preset
+    tooltip: "Predefined generation configurations with your customized settings. Save time by reusing your preferred setups for different maps or testing scenarios."
+
+  dem:
+    label: DEM
+    tooltip: Control terrain elevation, smoothing, and height adjustments.
+    fields:
+      adjust_terrain_to_ground_level:
+        label: Adjust Terrain to Ground Level
+        tooltip: Shifts the entire terrain so the lowest point aligns with ground level.
+      multiplier:
+        label: Height Multiplier
+        tooltip: Scales elevation values. Higher values produce more dramatic terrain.
+      plateau:
+        label: Plateau
+        tooltip: "Adds a base height (meters) to the whole map. Useful for flat areas where you need room for negative elevation (e.g. rivers)."
+      ceiling:
+        label: Ceiling
+        tooltip: Padding above the highest elevation point. Useful if you plan to sculpt terrain manually in Giants Editor.
+      water_depth:
+        label: Water Depth
+        tooltip: "Subtracts this depth from water areas. Skip if using high-quality DEM data — it will break existing depth data."
+      blur_radius:
+        label: Blur Radius
+        tooltip: "Smooths terrain by blurring elevation data (pixels). Avoid high values with high-quality DEM — it destroys detail."
+      minimum_height_scale:
+        label: Minimum Height Scale
+        tooltip: Minimum height scale value applied to the terrain.
+      add_foundations:
+        label: Add Foundations
+        tooltip: Flattens terrain under buildings to their average height.
+
+  background:
+    label: Background
+    tooltip: Terrain, water, and 3D elements surrounding the playable map area.
+    fields:
+      generate_background:
+        label: Generate Background
+        tooltip: "Generates background terrain outside the playable area. FS25: also outputs a ready-to-use i3d file when satellite images are enabled."
+      generate_water:
+        label: Generate Water
+        tooltip: "Generates water plane files. FS25: outputs a ready-to-use i3d file for direct Giants Editor import."
+      water_blurriness:
+        label: Water Blurriness
+        tooltip: Smooths the water plane surface. Too high a value may cause the water mesh to not match the terrain.
+      remove_center:
+        label: Remove Center
+        tooltip: Removes the playable map area from the background mesh so the two don't overlap.
+      flatten_roads:
+        label: Flatten Roads
+        tooltip: "Flattens terrain under roads. Do not use with high-quality DTM providers — it may worsen results."
+      flatten_water:
+        label: Flatten Water
+        tooltip: Sets all water bottoms to the same average height. Avoid on maps with large elevation differences.
+
+  grle:
+    label: Farmland and Vegetation
+    tooltip: Control farmland generation, grass, and vegetation distribution.
+    fields:
+      farmland_margin:
+        label: Farmland Margin
+        tooltip: Expands each farmland polygon by this many meters. Prevents edge clipping and gameplay issues.
+      add_farmyards:
+        label: Add Farmyards
+        tooltip: Creates farmlands from OSM farmyard areas. No fields or textures are drawn for these.
+      base_price:
+        label: Base Field Price
+        tooltip: Base farmland price in in-game currency. Default in-game maps use 60000.
+      price_scale:
+        label: Price Scale
+        tooltip: Percentage multiplier applied to the base field price.
+      add_grass:
+        label: Add Grass
+        tooltip: Fills all empty areas (no roads, fields, or buildings) with grass.
+      base_grass:
+        label: Base Grass
+        tooltip: "Plant type used as the base grass layer. Note: smallDenseMix cannot be mowed — choose a meadow type if you want mowable grass."
+      random_plants:
+        label: Random Plants
+        tooltip: Adds varied plant species to empty areas. Disable to use only basic grass.
+      fill_empty_farmlands:
+        label: Fill Empty Farmlands
+        tooltip: Fills farmlands with no detected crop type with a default ground layer.
+
+  i3d:
+    label: Objects and Splines
+    tooltip: Trees, forest density, road splines, and license plates.
+    fields:
+      add_trees:
+        label: Add Trees
+        tooltip: Places trees in OSM-defined forest areas.
+      forest_density:
+        label: Forest Density
+        tooltip: "Distance in meters between trees. Lower = denser forest. Very low values can crash Giants Editor."
+      tree_limit:
+        label: Tree Limit
+        tooltip: "Caps total tree count by auto-adjusting density. Set to 0 for no limit. Use to prevent Giants Editor crashes on large maps."
+      trees_relative_shift:
+        label: Tree Position Randomness
+        tooltip: Random positional offset per tree to avoid a uniform grid pattern.
+      spline_density:
+        label: Spline Density
+        tooltip: Number of points used to define road splines. Lower values produce smoother, simpler splines.
+      add_reversed_splines:
+        label: Add Reversed Splines
+        tooltip: Duplicates each spline in reverse for bidirectional road support.
+      field_splines:
+        label: Field Splines
+        tooltip: Generates splines along field boundaries.
+      license_plate_prefix:
+        label: License Plate Prefix
+        tooltip: "FS25 only: Regional prefix on license plates alongside the auto-detected country code (e.g. 'NS' → 'SRB NS'). Max 3 characters."
+
+  texture:
+    label: Textures
+    tooltip: Ground texture painting, field detection, and OSM data handling.
+    fields:
+      dissolve:
+        label: Dissolve Borders
+        tooltip: "Blends texture layer edges for a more natural look. Slow — enable for final generation only, not test runs."
+      fields_padding:
+        label: Fields Padding
+        tooltip: Shrinks field polygons by this many meters. Useful when fields are too close or overlap each other.
+      skip_drains:
+        label: Skip Drains
+        tooltip: Skips generating drains and ditches from OSM data.
+      use_cache:
+        label: Use Cache
+        tooltip: Reuses previously downloaded OSM data. Disable if OSM data has changed since your last generation.
+      use_precise_tags:
+        label: Use Precise Tags
+        tooltip: "Uses specific OSM tags (e.g. leaf_type) instead of generic ones. Objects without the precise tag won't be drawn — use only if your area has complete OSM tagging."
+
+  satellite:
+    label: Satellite Imagery
+    tooltip: Download and configure satellite imagery for textures and background.
+    fields:
+      download_images:
+        label: Download Satellite Images
+        tooltip: "Downloads satellite imagery. FS25: also auto-generates background_terrain.i3d and overview.dds for direct Giants Editor import."
+      zoom_level:
+        label: Zoom Level
+        tooltip: "Satellite image detail level (max recommended: 18). High values produce much larger files and significantly longer download times."
+
+  building:
+    label: Buildings
+    tooltip: Automatic building placement from OSM footprint data.
+    fields:
+      generate_buildings:
+        label: Generate Buildings
+        tooltip: Places buildings based on OSM building footprints.
+      region:
+        label: Region Style
+        tooltip: Architectural style region used when selecting building assets.
+      tolerance_factor:
+        label: Tolerance Factor
+        tooltip: How strictly building footprints must match available assets. Higher = more buildings placed but less accurate shapes.
+
+# Platform-specific sections come after shared settings
+
+windows:
+  label: Windows Application
+  # add Windows-specific sections here
+
+  generate_map:
+    label: Generate Map
+    tooltip: "Starts the map generation process with the current settings."
+
+  ready_to_generate:
+    label: Ready to Generate
+    tooltip: "All required settings are configured. Click Generate Map to start the process."
+
+  map_editor:
+    label: Map Editor
+    tooltip: "Allows to edit the generated map in a built-in editor. Note: this is a basic editor for quick adjustments — for advanced editing, use Giants Editor."
+
+  select_map:
+    label: Select Map
+    tooltip: "Choose a previously generated map to edit or view in the Map Editor."
+
+  edit_weather:
+    label: Edit Weather
+    tooltip: "Configure weather settings for the map, including time of day, season, and dynamic weather patterns."
+
+  settings:
+    label: Settings
+    tooltip: "Configure application settings, including language, performance options, and update preferences."
+
+  map_template:
+    label: Map Template
+    tooltip: "Select a map template to use as a base for generation."
+
+  template:
+    label: Template
+    tooltip: "Predefined map templates with specific settings for different types of maps."
+
+  schema:
+    label: Schema
+    tooltip: "Predefined configurations that apply specific settings for different schemas."
+
+  texture_schemas:
+    label: Texture Schemas
+    tooltip: "Choose a texture schema to apply specific ground textures and materials to the map."
+
+  tree_schemas:
+    label: Tree Schemas
+    tooltip: "Choose a tree schema to apply specific tree types and distributions to the map."
+
+  building_schemas:
+    label: Building Schemas
+    tooltip: "Choose a building schema to apply specific building types and distributions to the map."
+
+  general:
+    label: General
+    tooltip: "General settings and options for map generation and application behavior."
+
+  dtm_provider_settings:
+    label: DTM Provider Settings
+    tooltip: "Configure settings specific to the selected DTM provider, such as API keys, resolution preferences, and data caching options."
+
+  include_unreliable_providers:
+    label: Include Unreliable Providers
+    tooltip: "Include DTM providers that may have reliability issues or limited coverage. Use with caution."
+
+  map_generation:
+    label: Map Generation
+    tooltip: "Settings that control how the map is generated, including terrain, textures, and object placement."
+
+  browse:
+    label: Browse
+    tooltip: "Open a file dialog to select a file or directory for the corresponding setting."
+
+  refresh_map_list:
+    label: Refresh Map List
+    tooltip: "Refresh the list of generated maps to include any new maps created since the application was opened."
+
+  weather:
+    label: Weather Editor
+    
+    spring:
+      label: Spring
+
+    summer:
+      label: Summer
+    
+    autumn:
+      label: Autumn
+
+    winter:
+      label: Winter
+    
+    sun:
+      label: Sun
+    
+    cloudy:
+      label: Cloudy
+
+    rain:
+      label: Rain
+
+    hail:
+      label: Hail
+
+    snow:
+      label: Snow
+
+    twister:
+      label: Twister
+
+    probability_weight:
+      label: Probability
+
+    variations:
+      label: Variations
+    
+    duration:
+      label: Duration
+
+    wind_speed:
+      label: Wind Speed
+
+    temperature:
+      label: Temperature
+
+  save_changes:
+    label: Save Changes
+  
+  cancel:
+    label: Cancel
+
+docker:
+  label: Docker Application
+  
+  map_generator:
+    label: Map Generator
+  
+  my_maps:
+    label: My Maps
+
+  presets:
+    label: Presets
+
+  schemas_editor:
+    label: Schemas Editor
+
+  settings:
+    label: Settings
+
+  quick_load_presets:
+    label: Quick Load Presets
+  
+  main_settings:
+    label: Main Settings
+  
+  generation_settings:
+    label: Generation Settings
+
+  custom_osm:
+    label: Custom OSM
+  
+  custom_dem:
+    label: Custom DEM
+
+  show_only_popular:
+    label: Show Only Popular
+    tooltip: "Show only the most commonly used settings to simplify the interface."
+
+  public_osm:
+    label: Public OpenStreetMap
+    tooltip: "Real-time OSM data"
+
+  custom_osm_file:
+    label: Custom OSM File
+    tooltip: "Upload your own data"
+
+  new_version_is_available:
+    label: New version is available
+  
+  upgrade:
+    label: Upgrade
+
+  generate_map:
+    label: Generate Map
+    tooltip: "Enter valid coordinates, check the settings and click Generate map."
+
+  select_all:
+    label: Select All
+
+  deselect_all:
+    label: Deselect All
+
+  show_schema:
+    label: Show Schema
+  
+  trees:
+    label: Trees
+
+  search_trees:
+    label: Search trees
+
+  textures:
+    label: Textures
+
+  search_textures:
+    label: Search textures
+
+  map_preview:
+    label: Map Preview
+    tooltip: "Enter valid coordinates in the left panel to see your map preview here."

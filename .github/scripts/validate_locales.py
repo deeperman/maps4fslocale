@@ -93,7 +93,7 @@ def validate_files(files_to_check):
 
 
 def print_report(results):
-    """Print a human-readable report. Returns True if any issues were found."""
+    """Print a human-readable report and write a GitHub Job Summary. Returns True if any issues were found."""
     ok = []
     issues = []
 
@@ -103,7 +103,9 @@ def print_report(results):
         else:
             issues.append((path, status, details))
 
-    # ── OK files ────────────────────────────────────────────────────────────
+    had_issues = len(issues) > 0
+
+    # ── Console output ───────────────────────────────────────────────────────
     print("=" * 60)
     print("LOCALE VALIDATION REPORT")
     print("=" * 60)
@@ -113,7 +115,6 @@ def print_report(results):
         for path in ok:
             print(f"    {path.name}")
 
-    # ── Issue files ──────────────────────────────────────────────────────────
     if issues:
         print(f"\n❌  FILES WITH ISSUES ({len(issues)})")
         for path, status, details in issues:
@@ -122,18 +123,76 @@ def print_report(results):
                 print(f"    [INVALID YAML] {details}")
             elif status == "key_mismatch":
                 if "missing" in details:
-                    print(f"    [MISSING KEYS] ({len(details['missing'])} keys missing from en.yml reference):")
+                    print(
+                        f"    [MISSING KEYS] ({len(details['missing'])} keys missing from en.yml reference):"
+                    )
                     for key in details["missing"]:
                         print(f"        - {key}")
                 if "extra" in details:
-                    print(f"    [EXTRA KEYS] ({len(details['extra'])} keys not present in en.yml):")
+                    print(
+                        f"    [EXTRA KEYS] ({len(details['extra'])} keys not present in en.yml):"
+                    )
                     for key in details["extra"]:
                         print(f"        + {key}")
     else:
         print("\n✅  All checked files are valid and match the reference.")
 
     print("\n" + "=" * 60)
-    return len(issues) > 0
+
+    # ── GitHub Job Summary (Markdown) ────────────────────────────────────────
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary_path:
+        lines = []
+        overall = (
+            "❌ Validation failed" if had_issues else "✅ All locale files are valid"
+        )
+        lines.append(f"## Locale Validation Report\n")
+        lines.append(f"### {overall}\n")
+
+        if ok:
+            lines.append(
+                f"<details open>\n<summary>✅ Files OK ({len(ok)})</summary>\n"
+            )
+            lines.append("\n| File |")
+            lines.append("| --- |")
+            for path in ok:
+                lines.append(f"| `{path.name}` |")
+            lines.append("\n</details>\n")
+
+        if issues:
+            lines.append(
+                f"<details open>\n<summary>❌ Files with issues ({len(issues)})</summary>\n"
+            )
+            for path, status, details in issues:
+                lines.append(f"\n#### `{path.name}`\n")
+                if status == "syntax_error":
+                    lines.append(f"> ⚠️ **Invalid YAML syntax**\n")
+                    lines.append(f"```\n{details}\n```\n")
+                elif status == "key_mismatch":
+                    if "missing" in details:
+                        lines.append(
+                            f"**{len(details['missing'])} missing key(s)** (present in `en.yml` but absent here):\n"
+                        )
+                        lines.append("| Missing key |")
+                        lines.append("| --- |")
+                        for key in details["missing"]:
+                            lines.append(f"| `{key}` |")
+                        lines.append("")
+                    if "extra" in details:
+                        lines.append(
+                            f"**{len(details['extra'])} extra key(s)** (not present in `en.yml`):\n"
+                        )
+                        lines.append("| Extra key |")
+                        lines.append("| --- |")
+                        for key in details["extra"]:
+                            lines.append(f"| `{key}` |")
+                        lines.append("")
+            lines.append("</details>\n")
+
+        with open(summary_path, "a", encoding="utf-8") as f:
+            f.write("\n".join(lines) + "\n")
+
+    return had_issues
 
 
 def main():
@@ -141,7 +200,9 @@ def main():
     if len(sys.argv) > 1:
         files_to_check = [Path(f) for f in sys.argv[1:]]
         # Filter out the reference file itself if accidentally passed
-        files_to_check = [f for f in files_to_check if f.resolve() != REFERENCE_FILE.resolve()]
+        files_to_check = [
+            f for f in files_to_check if f.resolve() != REFERENCE_FILE.resolve()
+        ]
         if not files_to_check:
             print("No files to validate (only en.yml was passed — skipping).")
             sys.exit(0)

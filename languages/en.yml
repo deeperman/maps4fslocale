@@ -281,6 +281,60 @@ windows:
     label: Refresh Map List
     tooltip: "Refresh the list of generated maps to include any new maps created since the application was opened."
 
+  weather:
+    label: Weather Editor
+    
+    spring:
+      label: Spring
+
+    summer:
+      label: Summer
+    
+    autumn:
+      label: Autumn
+
+    winter:
+      label: Winter
+    
+    sun:
+      label: Sun
+    
+    cloudy:
+      label: Cloudy
+
+    rain:
+      label: Rain
+
+    hail:
+      label: Hail
+
+    snow:
+      label: Snow
+
+    twister:
+      label: Twister
+
+    probability_weight:
+      label: Probability
+
+    variations:
+      label: Variations
+    
+    duration:
+      label: Duration
+
+    wind_speed:
+      label: Wind Speed
+
+    temperature:
+      label: Temperature
+
+  save_changes:
+    label: Save Changes
+  
+  cancel:
+    label: Cancel
+
 docker:
   label: Docker Application
   

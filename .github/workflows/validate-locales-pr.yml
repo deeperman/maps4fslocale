@@ -1,0 +1,60 @@
+name: Validate Changed Locale Files (PR)
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate changed locale YAML files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch enough history to diff against the base branch
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Detect changed locale files
+        id: changed
+        run: |
+          BASE="${{ github.base_ref }}"
+          git fetch origin "$BASE" --depth=1
+
+          # All changed files against the PR base
+          CHANGED=$(git diff --name-only "origin/$BASE"...HEAD)
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          # Check if en.yml (the reference) was modified
+          if echo "$CHANGED" | grep -qE '^languages/en\.yml$'; then
+            echo "en.yml changed → will validate ALL locale files"
+            echo "validate_all=true" >> "$GITHUB_OUTPUT"
+            echo "files=" >> "$GITHUB_OUTPUT"
+          else
+            # Collect only changed locale yml files (exclude en.yml — it's the reference)
+            FILES=$(echo "$CHANGED" | grep -E '^languages/[^/]+\.yml$' | grep -v '^languages/en\.yml$' | tr '\n' ' ')
+            echo "Locale files to validate: $FILES"
+            echo "validate_all=false" >> "$GITHUB_OUTPUT"
+            echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run locale validation (changed files)
+        if: steps.changed.outputs.validate_all == 'false' && steps.changed.outputs.files != ''
+        run: python .github/scripts/validate_locales.py ${{ steps.changed.outputs.files }}
+
+      - name: Run locale validation (all files — en.yml was modified)
+        if: steps.changed.outputs.validate_all == 'true'
+        run: python .github/scripts/validate_locales.py
+
+      - name: No locale files changed
+        if: steps.changed.outputs.validate_all == 'false' && steps.changed.outputs.files == ''
+        run: echo "No locale files were modified in this PR — nothing to validate."

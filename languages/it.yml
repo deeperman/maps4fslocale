@@ -280,6 +280,60 @@ windows:
     label: Aggiorna lista mappe
     tooltip: "Aggiorna la lista delle mappe generate per includere le nuove mappe create dall'avvio dell'applicazione."
 
+  weather:
+    label: Editor meteo
+    
+    spring:
+      label: Primavera
+
+    summer:
+      label: Estate
+    
+    autumn:
+      label: Autunno
+
+    winter:
+      label: Inverno
+    
+    sun:
+      label: Sole
+    
+    cloudy:
+      label: Nuvoloso
+
+    rain:
+      label: Pioggia
+
+    hail:
+      label: Grandine
+
+    snow:
+      label: Neve
+
+    twister:
+      label: Tornado
+
+    probability_weight:
+      label: Probabilità
+
+    variations:
+      label: Variazioni
+    
+    duration:
+      label: Durata
+
+    wind_speed:
+      label: Velocità del vento
+
+    temperature:
+      label: Temperatura
+
+  save_changes:
+    label: Salva modifiche
+  
+  cancel:
+    label: Annulla
+
 docker:
   label: Applicazione Docker
 

@@ -281,6 +281,60 @@ windows:
     label: Osveži listu mapa
     tooltip: "Osvežava listu generisanih mapa kako bi uključila nove mape kreirane od pokretanja aplikacije."
 
+  weather:
+    label: Urednik vremena
+    
+    spring:
+      label: Proleće
+
+    summer:
+      label: Leto
+    
+    autumn:
+      label: Jesen
+
+    winter:
+      label: Zima
+    
+    sun:
+      label: Sunce
+    
+    cloudy:
+      label: Oblačno
+
+    rain:
+      label: Kiša
+
+    hail:
+      label: Grad
+
+    snow:
+      label: Sneg
+
+    twister:
+      label: Tornado
+
+    probability_weight:
+      label: Verovatnoća
+
+    variations:
+      label: Varijacije
+    
+    duration:
+      label: Trajanje
+
+    wind_speed:
+      label: Brzina vetra
+
+    temperature:
+      label: Temperatura
+
+  save_changes:
+    label: Sačuvaj izmene
+  
+  cancel:
+    label: Otkaži
+
 docker:
   label: Docker aplikacija
 

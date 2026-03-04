@@ -280,6 +280,60 @@ windows:
     label: Kartenliste aktualisieren
     tooltip: "Aktualisiert die Liste der generierten Karten um neue, seit dem Programmstart erstellte Karten."
 
+  weather:
+    label: Wetter-Editor
+    
+    spring:
+      label: Frühling
+
+    summer:
+      label: Sommer
+    
+    autumn:
+      label: Herbst
+
+    winter:
+      label: Winter
+    
+    sun:
+      label: Sonne
+    
+    cloudy:
+      label: Bewölkt
+
+    rain:
+      label: Regen
+
+    hail:
+      label: Hagel
+
+    snow:
+      label: Schnee
+
+    twister:
+      label: Tornado
+
+    probability_weight:
+      label: Wahrscheinlichkeit
+
+    variations:
+      label: Variationen
+    
+    duration:
+      label: Dauer
+
+    wind_speed:
+      label: Windgeschwindigkeit
+
+    temperature:
+      label: Temperatur
+
+  save_changes:
+    label: Änderungen speichern
+  
+  cancel:
+    label: Abbrechen
+
 docker:
   label: Docker-Anwendung
 

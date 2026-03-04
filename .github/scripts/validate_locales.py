@@ -58,16 +58,16 @@ def compare_keys(reference_paths, candidate_paths):
 def validate_files(files_to_check):
     """
     Validate each file.  Returns a list of (path, status, details) tuples.
-    status is 'ok', 'syntax_error', or 'key_mismatch'.
+    status is 'reference_ok', 'reference_error', 'ok', 'syntax_error', or 'key_mismatch'.
+    The first entry is always the reference file (en.yml) itself.
     """
-    # Load reference
+    # Load reference — always the first result entry
     ref_data, ref_err = load_yaml(REFERENCE_FILE)
     if ref_err:
-        print(f"FATAL: Cannot load reference file {REFERENCE_FILE}: {ref_err}")
-        sys.exit(2)
+        return [(REFERENCE_FILE, "reference_error", ref_err)]
 
     ref_paths = set(extract_key_paths(ref_data))
-    results = []
+    results = [(REFERENCE_FILE, "reference_ok", None)]
 
     for path in files_to_check:
         path = Path(path)
@@ -94,12 +94,17 @@ def validate_files(files_to_check):
 
 def print_report(results):
     """Print a human-readable report and write a GitHub Job Summary. Returns True if any issues were found."""
+    reference_entry = next(
+        (r for r in results if r[1] in ("reference_ok", "reference_error")), None
+    )
+    ref_broken = reference_entry and reference_entry[1] == "reference_error"
+
     ok = []
     issues = []
 
     for path, status, details in results:
-        if status == "ok":
-            ok.append(path)
+        if status in ("ok", "reference_ok"):
+            ok.append((path, status))
         else:
             issues.append((path, status, details))
 
@@ -112,14 +117,20 @@ def print_report(results):
 
     if ok:
         print(f"\n✅  FILES OK ({len(ok)})")
-        for path in ok:
-            print(f"    {path.name}")
+        for path, status in ok:
+            note = " (reference)" if status == "reference_ok" else ""
+            print(f"    {path.name}{note}")
 
     if issues:
         print(f"\n❌  FILES WITH ISSUES ({len(issues)})")
         for path, status, details in issues:
             print(f"\n  ── {path.name} ──")
-            if status == "syntax_error":
+            if status == "reference_error":
+                print(
+                    f"    [BROKEN REFERENCE] en.yml has invalid syntax — cannot validate other files."
+                )
+                print(f"    {details}")
+            elif status == "syntax_error":
                 print(f"    [INVALID YAML] {details}")
             elif status == "key_mismatch":
                 if "missing" in details:
@@ -153,10 +164,11 @@ def print_report(results):
             lines.append(
                 f"<details open>\n<summary>✅ Files OK ({len(ok)})</summary>\n"
             )
-            lines.append("\n| File |")
-            lines.append("| --- |")
-            for path in ok:
-                lines.append(f"| `{path.name}` |")
+            lines.append("\n| File | Role |")
+            lines.append("| --- | --- |")
+            for path, status in ok:
+                role = "**reference**" if status == "reference_ok" else "locale"
+                lines.append(f"| `{path.name}` | {role} |")
             lines.append("\n</details>\n")
 
         if issues:
@@ -165,7 +177,12 @@ def print_report(results):
             )
             for path, status, details in issues:
                 lines.append(f"\n#### `{path.name}`\n")
-                if status == "syntax_error":
+                if status == "reference_error":
+                    lines.append(
+                        "> 🔴 **Reference file `en.yml` has invalid YAML syntax — other files cannot be validated.**\n"
+                    )
+                    lines.append(f"```\n{details}\n```\n")
+                elif status == "syntax_error":
                     lines.append(f"> ⚠️ **Invalid YAML syntax**\n")
                     lines.append(f"```\n{details}\n```\n")
                 elif status == "key_mismatch":
@@ -218,6 +235,12 @@ def main():
     print(f"Checking:  {', '.join(f.name for f in files_to_check)}\n")
 
     results = validate_files(files_to_check)
+
+    # If en.yml itself is broken there's nothing more we can do — report and stop
+    if results and results[0][1] == "reference_error":
+        print_report(results)
+        sys.exit(1)
+
     had_issues = print_report(results)
 
     sys.exit(1 if had_issues else 0)
